@@ -102,7 +102,7 @@ export default function RootLayout({
       >
         <Analytics />
         <Navigation />
-        <main className="min-h-screen">
+        <main>
           {children}
         </main>
         <Footer />

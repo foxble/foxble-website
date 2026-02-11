@@ -14,7 +14,7 @@ export default function Hero({
   showBanner = true,
 }: HeroProps) {
   return (
-    <header className="relative min-h-[50vh] pt-[20vh] text-center text-white overflow-hidden bg-[#37387a]">
+    <header className="relative min-h-[calc(100vh-64px)] flex items-center justify-center text-center text-white overflow-hidden bg-[#37387a]">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image

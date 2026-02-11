@@ -44,7 +44,7 @@ export default async function About() {
     const { title, content } = page.fields
 
     return (
-      <section className="max-w-4xl mx-auto px-4 py-16 mt-16">
+      <section className="min-h-screen max-w-4xl mx-auto px-4 py-16 mt-16">
         <div className="prose prose-lg max-w-none">
           <h2 className="text-3xl font-bold mb-6">{title}</h2>
           <div>
@@ -57,7 +57,7 @@ export default async function About() {
     console.error('Error loading About page from Contentful:', error)
     // Fallback content if Contentful is not configured
     return (
-      <section className="max-w-4xl mx-auto px-4 py-16 mt-16">
+      <section className="min-h-screen max-w-4xl mx-auto px-4 py-16 mt-16">
         <div className="prose prose-lg max-w-none">
           <h2 className="text-3xl font-bold mb-6">About</h2>
           <p className="text-lg leading-relaxed mb-4">
