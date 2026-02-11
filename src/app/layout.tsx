@@ -98,7 +98,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${michroma.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${michroma.variable} antialiased bg-[#37387a]`}
       >
         <Analytics />
         <Navigation />
