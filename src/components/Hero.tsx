@@ -14,7 +14,7 @@ export default function Hero({
   showBanner = true,
 }: HeroProps) {
   return (
-    <header className="relative min-h-[calc(100vh-64px)] flex items-center justify-center text-center text-white overflow-hidden bg-[#37387a]">
+    <header className="relative h-[calc(100vh-140px)] flex flex-col justify-center text-center text-white overflow-hidden bg-[#37387a]">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -28,13 +28,15 @@ export default function Hero({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-4">
-        <h1 className="text-5xl font-bold mb-4">{title}</h1>
-        <h2 className="text-2xl font-light mb-4">{subtitle1}</h2>
-        <h2 className="text-2xl font-light mb-4">{subtitle2}</h2>
+      <div className="relative z-10 px-4 flex-1 flex flex-col justify-center">
+        <div>
+          <h1 className="text-5xl font-bold mb-4">{title}</h1>
+          <h2 className="text-2xl font-light mb-4">{subtitle1}</h2>
+          <h2 className="text-2xl font-light mb-4">{subtitle2}</h2>
+        </div>
 
         {showBanner && (
-          <div className="mt-16">
+          <div className="mt-auto pt-8 pb-4">
             <Image
               src="/banner728x90ehx.jpg"
               alt="Foxble Banner"
