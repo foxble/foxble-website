@@ -1,35 +1,4 @@
-import { createClient, Entry } from 'contentful'
-
-// Type definitions for Contentful entries
-export interface PageFields {
-  title: string
-  slug: string
-  metaDescription: string
-  content: any // Rich text content
-  publishDate: string
-}
-
-export interface BlogPostFields {
-  title: string
-  slug: string
-  excerpt: string
-  body: any // Rich text content
-  author: any // Author reference
-  category: string
-  publishDate: string
-}
-
-export interface AuthorFields {
-  name: string
-  bio: string
-  photo: any
-}
-
-export interface SiteSettingsFields {
-  siteName: string
-  contactEmail: string
-  socialLinks: any
-}
+import { createClient } from 'contentful'
 
 // Create Contentful client
 const client = createClient({
@@ -40,9 +9,9 @@ const client = createClient({
 /**
  * Fetch a single page by slug
  */
-export async function getPage(slug: string): Promise<Entry<PageFields> | null> {
+export async function getPage(slug: string): Promise<any> {
   try {
-    const response = await client.getEntries<PageFields>({
+    const response = await client.getEntries({
       content_type: 'page',
       'fields.slug': slug,
       limit: 1,
@@ -58,9 +27,9 @@ export async function getPage(slug: string): Promise<Entry<PageFields> | null> {
 /**
  * Fetch all pages
  */
-export async function getAllPages(): Promise<Entry<PageFields>[]> {
+export async function getAllPages(): Promise<any[]> {
   try {
-    const response = await client.getEntries<PageFields>({
+    const response = await client.getEntries({
       content_type: 'page',
       order: ['fields.publishDate'],
     })
@@ -75,9 +44,9 @@ export async function getAllPages(): Promise<Entry<PageFields>[]> {
 /**
  * Fetch all blog posts
  */
-export async function getAllBlogPosts(): Promise<Entry<BlogPostFields>[]> {
+export async function getAllBlogPosts(): Promise<any[]> {
   try {
-    const response = await client.getEntries<BlogPostFields>({
+    const response = await client.getEntries({
       content_type: 'blogPost',
       order: ['-fields.publishDate'],
     })
@@ -92,9 +61,9 @@ export async function getAllBlogPosts(): Promise<Entry<BlogPostFields>[]> {
 /**
  * Fetch a single blog post by slug
  */
-export async function getBlogPost(slug: string): Promise<Entry<BlogPostFields> | null> {
+export async function getBlogPost(slug: string): Promise<any> {
   try {
-    const response = await client.getEntries<BlogPostFields>({
+    const response = await client.getEntries({
       content_type: 'blogPost',
       'fields.slug': slug,
       limit: 1,
@@ -110,9 +79,9 @@ export async function getBlogPost(slug: string): Promise<Entry<BlogPostFields> |
 /**
  * Fetch site settings
  */
-export async function getSiteSettings(): Promise<Entry<SiteSettingsFields> | null> {
+export async function getSiteSettings(): Promise<any> {
   try {
-    const response = await client.getEntries<SiteSettingsFields>({
+    const response = await client.getEntries({
       content_type: 'siteSettings',
       limit: 1,
     })
