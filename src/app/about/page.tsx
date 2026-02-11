@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import { getPage } from '@/lib/contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
+// Force dynamic rendering - fetch fresh content from Contentful on every request
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function generateMetadata(): Promise<Metadata> {
   try {
     const page = await getPage('about')
