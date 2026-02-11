@@ -1,0 +1,8 @@
+
+cd /home/simon/Documents/Files/Claude/foxble
+claude
+
+how well will this subdomain https://datahub.foxble.com pointing to http://18.246.13.6/login integrate with the vercel website? or since http://18.246.13.6/login is coming from aws it would be better to stick with aws for the website or it really does not make that much of a differnce hosting the site on vercel?
+
+
+claude --resume fab9cc4f-65f1-473c-9bce-b2749ed0e1a3
