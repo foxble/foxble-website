@@ -24,6 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function About() {
   try {
     const page = await getPage('about')
+
+    // Check if page exists and has fields
+    if (!page || !page.fields) {
+      console.error('About page not found in Contentful or missing fields:', page)
+      throw new Error('Page not found')
+    }
+
     const { title, content } = page.fields
 
     return (
@@ -37,6 +44,7 @@ export default async function About() {
       </section>
     )
   } catch (error) {
+    console.error('Error loading About page from Contentful:', error)
     // Fallback content if Contentful is not configured
     return (
       <section className="max-w-4xl mx-auto px-4 py-16 mt-16">
