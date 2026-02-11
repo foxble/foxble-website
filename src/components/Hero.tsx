@@ -28,15 +28,15 @@ export default function Hero({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-4 flex-1 flex flex-col justify-center">
-        <div>
-          <h1 className="text-5xl font-bold mb-4">{title}</h1>
-          <h2 className="text-2xl font-light mb-4">{subtitle1}</h2>
-          <h2 className="text-2xl font-light mb-4">{subtitle2}</h2>
+      <div className="relative z-10 px-4 flex-1 flex flex-col justify-between py-16">
+        <div className="space-y-4 pt-8">
+          <h1 className="text-5xl font-bold">{title}</h1>
+          <h2 className="text-2xl font-light">{subtitle1}</h2>
+          <h2 className="text-2xl font-light">{subtitle2}</h2>
         </div>
 
         {showBanner && (
-          <div className="mt-auto pt-8 pb-4">
+          <div className="pb-4">
             <Image
               src="/banner728x90ehx.jpg"
               alt="Foxble Banner"
