@@ -32,7 +32,7 @@ Google Analytics 4 (client-side tracking)
 GoDaddy DNS (CNAME → Vercel)
 
 Separate:
-User → datahub.foxble.com → AWS ALB → EC2 (18.246.13.6)
+User → tracking.foxble.com → AWS ALB → EC2 (18.246.13.6)
 ```
 
 ---
@@ -64,7 +64,7 @@ User → datahub.foxble.com → AWS ALB → EC2 (18.246.13.6)
 - Hardcoded content → Contentful CMS
 
 **Add:**
-- "Sign In" link in navigation → portal.foxble.com (separate data hub site)
+- "Sign In" link in navigation → portal.foxble.com (separate tracking portal site)
 
 ### Backend Stack
 
@@ -116,7 +116,7 @@ Implement:
 - Google Analytics 4 integration with Next.js Script
 - Global styles (Tailwind CSS)
 - Structured data (Organization schema)
-- Navigation with "Sign In" link to datahub.foxble.com
+- Navigation with "Sign In" link to tracking.foxble.com
 
 Reference: Next.js Metadata API for dynamic per-page meta tags
 
@@ -130,7 +130,7 @@ Reference: Next.js Metadata API for dynamic per-page meta tags
   <Link href="/faqs">FAQs</Link>
   <Link href="/support">Support</Link>
   <Link href="/policies">Policies</Link>
-  <a href="https://datahub.foxble.com" className="sign-in-button">
+  <a href="https://tracking.foxble.com" className="sign-in-button">
     Sign In
   </a>
 </nav>
@@ -325,11 +325,11 @@ export const event = ({ action, category, label, value }) => {
 
 ---
 
-## Data Hub Portal (Separate Project)
+## Tracking Portal Portal (Separate Project)
 
-The "Sign In" link will point to **portal.foxble.com**, which will be a separate deployment of an authenticated data hub application.
+The "Sign In" link will point to **portal.foxble.com**, which will be a separate deployment of an authenticated tracking portal application.
 
-**Options for Data Hub:**
+**Options for Tracking Portal:**
 
 1. **Deploy nrfcloud codebase** (`/home/simon/Documents/Files/Claude/nrfcloud`)
    - Already has full authentication system
@@ -338,7 +338,7 @@ The "Sign In" link will point to **portal.foxble.com**, which will be a separate
    - Would need to be deployed separately (EC2, ECS, or similar)
    - Requires separate ACM certificate for portal.foxble.com
 
-2. **New data hub application**
+2. **New tracking portal application**
    - Build from scratch with specific requirements
    - Could reuse nrfcloud auth patterns
    - Deployed separately from marketing site
@@ -349,7 +349,7 @@ The "Sign In" link will point to **portal.foxble.com**, which will be a separate
 - Database hosting (RDS/DynamoDB)
 - Backend API hosting (EC2, ECS, Lambda, etc.)
 
-**For this plan:** We'll add the "Sign In" link that points to portal.foxble.com. The actual data hub deployment would be a separate project.
+**For this plan:** We'll add the "Sign In" link that points to portal.foxble.com. The actual tracking portal deployment would be a separate project.
 
 ---
 
@@ -422,7 +422,7 @@ From `/home/simon/Documents/Files/Claude/foxble/website/src/components/pages/`:
    - Value: `cname.vercel-dns.com`
    - TTL: 600
 
-   **Data Hub Portal (AWS - separate):**
+   **Tracking Portal Portal (AWS - separate):**
    - Type: A Record
    - Name: datahub
    - Value: [ALB IP or use CNAME to ALB DNS name]
@@ -470,7 +470,7 @@ From `/home/simon/Documents/Files/Claude/foxble/website/src/components/pages/`:
 - [ ] Implement metadata API for SEO
 - [ ] Add Google Analytics 4
 - [ ] Create dynamic routes for CMS content
-- [ ] Add "Sign In" link to datahub.foxble.com
+- [ ] Add "Sign In" link to tracking.foxble.com
 
 **Afternoon (2 hours): Deploy to Vercel**
 - [ ] Push code to GitHub
@@ -499,15 +499,15 @@ From `/home/simon/Documents/Files/Claude/foxble/website/src/components/pages/`:
 - [ ] Verify HTTPS working (Vercel auto-provisions SSL)
 - [ ] Test site on custom domain
 
-### Day 4: Data Hub SSL & Final Testing (4-6 hours)
+### Day 4: Tracking Portal SSL & Final Testing (4-6 hours)
 
-**Morning (3 hours): Data Hub SSL Setup**
+**Morning (3 hours): Tracking Portal SSL Setup**
 - [ ] Create AWS Application Load Balancer
-- [ ] Request ACM certificate for datahub.foxble.com
+- [ ] Request ACM certificate for tracking.foxble.com
 - [ ] Configure target group pointing to EC2 (18.246.13.6)
-- [ ] Update GoDaddy DNS: datahub.foxble.com → ALB
+- [ ] Update GoDaddy DNS: tracking.foxble.com → ALB
 - [ ] Wait for SSL certificate validation
-- [ ] Verify HTTPS access to data hub
+- [ ] Verify HTTPS access to tracking portal
 - [ ] Test "Sign In" link from marketing site
 
 **Afternoon (2-3 hours): Final Testing & Launch**

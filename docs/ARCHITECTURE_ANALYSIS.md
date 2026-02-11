@@ -7,7 +7,7 @@ This document contains the comprehensive architectural analysis, platform compar
 ## Table of Contents
 
 1. [Database & Authentication Review](#a1-database--authentication-review)
-2. [Data Hub Integration](#a2-data-hub-integration)
+2. [Tracking Portal Integration](#a2-data-hub-integration)
 3. [Hosting Platform Comparison](#a3-hosting-platform-comparison)
 4. [Final Architecture Recommendation](#a4-final-architecture-recommendation)
 5. [Implementation Decision](#a5-implementation-decision)
@@ -33,7 +33,7 @@ The original plan included:
 After clarifying requirements, determined that:
 1. **No authentication needed** - Marketing site is completely public
 2. **No database needed** - Contact form can email directly via SES
-3. **Sign-in link points to separate data hub** - Not authentication on marketing site
+3. **Sign-in link points to separate tracking portal** - Not authentication on marketing site
 
 ### Impact
 - **Cost reduction:** $18-33/month → $3-8/month (removed $15-20 RDS cost)
@@ -45,25 +45,25 @@ After clarifying requirements, determined that:
 - Pure static site (Next.js SSG → S3 + CloudFront or Vercel)
 - Single Lambda function for contact form
 - Contact form sends email via SES (no storage)
-- "Sign In" link in navigation points to datahub.foxble.com (separate AWS deployment)
+- "Sign In" link in navigation points to tracking.foxble.com (separate AWS deployment)
 
 ---
 
-## A2. Data Hub Integration
+## A2. Tracking Portal Integration
 
 ### Requirement
-User has existing data hub at `http://18.246.13.6/login` (AWS EC2 instance) that needs to be accessible via `datahub.foxble.com` subdomain.
+User has existing tracking portal at `http://18.246.13.6/login` (AWS EC2 instance) that needs to be accessible via `tracking.foxble.com` subdomain.
 
 ### Integration Pattern
 ```
 Marketing Site (foxble.com)
     ↓ Simple navigation link
-Data Hub (datahub.foxble.com)
+Tracking Portal (tracking.foxble.com)
 ```
 
 The marketing site includes a "Sign In" button/link in the navigation:
 ```tsx
-<a href="https://datahub.foxble.com">Sign In</a>
+<a href="https://tracking.foxble.com">Sign In</a>
 ```
 
 ### Key Points
@@ -77,7 +77,7 @@ The marketing site includes a "Sign In" button/link in the navigation:
 GoDaddy DNS Records:
 ├─ foxble.com          → CNAME → [marketing-site-host]
 ├─ www.foxble.com      → CNAME → [marketing-site-host]
-└─ datahub.foxble.com  → A Record → 18.246.13.6 (AWS EC2)
+└─ tracking.foxble.com  → A Record → 18.246.13.6 (AWS EC2)
                          OR CNAME → [ALB DNS name]
 ```
 
@@ -94,7 +94,7 @@ GoDaddy DNS Records:
 
 #### Option 1: AWS Application Load Balancer (Recommended)
 ```
-User → datahub.foxble.com (HTTPS)
+User → tracking.foxble.com (HTTPS)
      ↓
 AWS ALB with ACM certificate (free SSL)
      ↓
@@ -113,7 +113,7 @@ Install SSL certificate directly on EC2 instance using Certbot.
 
 ```bash
 sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d datahub.foxble.com
+sudo certbot --nginx -d tracking.foxble.com
 ```
 
 **Cost:** Free
@@ -288,7 +288,7 @@ What matters MORE than hosting platform:
 - Cost: $0/month (free tier)
 - Setup: 2 hours
 
-**Data Hub (datahub.foxble.com):** AWS EC2
+**Tracking Portal (tracking.foxble.com):** AWS EC2
 - Already deployed at 18.246.13.6
 - Full authentication system (nrfcloud app)
 - MySQL database
@@ -306,7 +306,7 @@ What matters MORE than hosting platform:
 
 ### Integration Validation
 
-**Question:** Does hosting marketing site on Vercel while data hub is on AWS cause problems?
+**Question:** Does hosting marketing site on Vercel while tracking portal is on AWS cause problems?
 
 **Answer:** No, absolutely no issues.
 
@@ -316,7 +316,7 @@ User visits foxble.com (Vercel)
     ↓
 User clicks "Sign In" link
     ↓
-Browser navigates to datahub.foxble.com (AWS)
+Browser navigates to tracking.foxble.com (AWS)
     ↓
 User logs in to data portal
 ```
@@ -326,7 +326,7 @@ This is a standard web navigation pattern (like clicking a link to Twitter or Gi
 **DNS Setup:**
 ```
 foxble.com         → Vercel (CNAME to vercel-deployment.app)
-datahub.foxble.com → AWS (A record to ALB or EC2)
+tracking.foxble.com → AWS (A record to ALB or EC2)
 ```
 
 These are independent DNS records managed in GoDaddy. Works with any combination of hosting providers.
@@ -371,7 +371,7 @@ Analytics → Google Analytics 4
 - ✅ Contact form with email notifications
 - ✅ Content management via Contentful
 - ✅ Analytics tracking
-- ✅ "Sign In" link to data hub
+- ✅ "Sign In" link to tracking portal
 
 **Cost:** $0/month (Vercel free tier)
 
@@ -379,11 +379,11 @@ Analytics → Google Analytics 4
 
 ---
 
-### Data Hub (datahub.foxble.com) - AWS
+### Tracking Portal (tracking.foxble.com) - AWS
 
 **Infrastructure:**
 ```
-User → datahub.foxble.com (DNS)
+User → tracking.foxble.com (DNS)
      ↓
 AWS Application Load Balancer (HTTPS via ACM)
      ↓
@@ -413,7 +413,7 @@ RDS MySQL (user accounts, data)
 **Status:** Already deployed at 18.246.13.6
 
 **Next Steps:**
-1. Setup ALB with ACM certificate for datahub.foxble.com
+1. Setup ALB with ACM certificate for tracking.foxble.com
 2. Configure GoDaddy DNS to point to ALB
 3. Verify HTTPS working
 4. Test navigation from marketing site
@@ -425,7 +425,7 @@ RDS MySQL (user accounts, data)
 | Component | Hosting | Monthly Cost |
 |-----------|---------|--------------|
 | Marketing Site (foxble.com) | Vercel | $0 |
-| Data Hub (datahub.foxble.com) | AWS | $16-30 |
+| Tracking Portal (tracking.foxble.com) | AWS | $16-30 |
 | Domain (GoDaddy) | GoDaddy | $12-20/year |
 | Contentful CMS | Contentful | $0 (free tier) |
 | **Total Monthly** | | **$16-30** |
@@ -455,7 +455,7 @@ RDS MySQL (user accounts, data)
 - Day 1 (2 hours): Setup Contentful, migrate content
 - Day 2 (2 hours): Implement contact form
 - Day 2 (2 hours): Add Google Analytics
-- Day 3 (3 hours): Setup SSL on data hub (ALB)
+- Day 3 (3 hours): Setup SSL on tracking portal (ALB)
 - Day 3 (1 hour): Configure DNS
 - Day 4: Testing + launch
 - **Total: 3-4 days**
@@ -477,11 +477,11 @@ RDS MySQL (user accounts, data)
 6. Deploy to Vercel
 7. Configure DNS (foxble.com → Vercel)
 
-**Phase 2: Data Hub SSL (1 day)**
+**Phase 2: Tracking Portal SSL (1 day)**
 1. Create Application Load Balancer
-2. Request ACM certificate for datahub.foxble.com
+2. Request ACM certificate for tracking.foxble.com
 3. Configure target group to EC2 (18.246.13.6)
-4. Update DNS (datahub.foxble.com → ALB)
+4. Update DNS (tracking.foxble.com → ALB)
 5. Test HTTPS access
 
 **Phase 3: Launch (1 day)**
@@ -496,7 +496,7 @@ RDS MySQL (user accounts, data)
 ## A6. Key Learnings & Decisions
 
 ### Decision 1: No Authentication on Marketing Site
-**Reasoning:** Marketing site is purely informational. Authentication lives in separate data hub.
+**Reasoning:** Marketing site is purely informational. Authentication lives in separate tracking portal.
 **Impact:** Saved $15-20/month, reduced complexity by 60%
 
 ### Decision 2: No Database for Marketing Site
@@ -515,7 +515,7 @@ RDS MySQL (user accounts, data)
 - Commercial use requires $20/month Pro plan (still cheaper than AWS setup complexity)
 - Less control than AWS (but marketing site doesn't need it)
 
-### Decision 4: Keep Data Hub on AWS
+### Decision 4: Keep Tracking Portal on AWS
 **Reasoning:**
 - Already deployed and working
 - Requires database (MySQL)
@@ -546,7 +546,7 @@ RDS MySQL (user accounts, data)
 2. **Create Next.js project** from existing React app
 3. **Setup Contentful** account and content model
 4. **Deploy to Vercel** (takes ~2 hours)
-5. **Setup ALB for data hub** (takes ~3 hours)
+5. **Setup ALB for tracking portal** (takes ~3 hours)
 6. **Configure DNS** in GoDaddy
 7. **Launch!**
 
@@ -561,7 +561,7 @@ RDS MySQL (user accounts, data)
 
 ## A8. Conclusion
 
-The hybrid approach (Vercel for marketing, AWS for data hub) provides:
+The hybrid approach (Vercel for marketing, AWS for tracking portal) provides:
 - ✅ **Best SEO** (95-100 Lighthouse vs 85-95 AWS initially)
 - ✅ **Lowest cost** ($0 vs $3-8/month for marketing site)
 - ✅ **Fastest launch** (5-6 days vs 6-7 weeks)
