@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPage } from '@/lib/contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { BLOCKS } from '@contentful/rich-text-types'
 
 // Force dynamic rendering - fetch fresh content from Contentful on every request
 export const dynamic = 'force-dynamic'
@@ -21,6 +22,15 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+// Rich text rendering options for proper paragraph spacing
+const renderOptions = {
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
+      <p className="mb-4 text-lg leading-relaxed">{children}</p>
+    ),
+  },
+}
+
 export default async function About() {
   try {
     const page = await getPage('about')
@@ -37,8 +47,8 @@ export default async function About() {
       <section className="max-w-4xl mx-auto px-4 py-16 mt-16">
         <div className="prose prose-lg max-w-none">
           <h2 className="text-3xl font-bold mb-6">{title}</h2>
-          <div className="text-lg leading-relaxed">
-            {documentToReactComponents(content)}
+          <div>
+            {documentToReactComponents(content, renderOptions)}
           </div>
         </div>
       </section>
