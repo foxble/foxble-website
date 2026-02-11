@@ -14,7 +14,7 @@ export interface BlogPostFields {
   slug: string
   excerpt: string
   body: any // Rich text content
-  author: Entry<AuthorFields>
+  author: any // Author reference
   category: string
   publishDate: string
 }
