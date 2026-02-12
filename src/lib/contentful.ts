@@ -92,3 +92,20 @@ export async function getSiteSettings(): Promise<any> {
     return null
   }
 }
+
+/**
+ * Fetch home page hero content
+ */
+export async function getHomePageHero(): Promise<any> {
+  try {
+    const response = await client.getEntries({
+      content_type: 'homePageHero',
+      limit: 1,
+    })
+
+    return response.items[0] || null
+  } catch (error) {
+    console.error('Error fetching home page hero:', error)
+    return null
+  }
+}
