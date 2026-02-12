@@ -5,6 +5,8 @@ interface HeroProps {
   subtitle1?: string
   subtitle2?: string
   showBanner?: boolean
+  backgroundImage?: string
+  bannerImage?: string
 }
 
 export default function Hero({
@@ -12,13 +14,15 @@ export default function Hero({
   subtitle1 = 'Connecting devices in real time',
   subtitle2 = 'Satellite Cellular BLE',
   showBanner = true,
+  backgroundImage = '/images/space.jpg',
+  bannerImage = '/banner728x90ehx.jpg',
 }: HeroProps) {
   return (
     <header className="relative h-[calc(100vh-80px)] flex flex-col justify-center text-center text-white overflow-hidden bg-[#37387a]">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/space.jpg"
+          src={backgroundImage}
           alt="Space background"
           fill
           className="object-cover"
@@ -38,7 +42,7 @@ export default function Hero({
         {showBanner && (
           <div className="pb-4">
             <Image
-              src="/banner728x90ehx.jpg"
+              src={bannerImage}
               alt="Foxble Banner"
               width={728}
               height={90}
