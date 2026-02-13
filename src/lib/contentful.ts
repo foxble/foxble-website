@@ -109,3 +109,20 @@ export async function getHomePageHero(): Promise<any> {
     return null
   }
 }
+
+/**
+ * Fetch all feature sections sorted by order
+ */
+export async function getFeatureSections(): Promise<any[]> {
+  try {
+    const response = await client.getEntries({
+      content_type: 'featureSection',
+      order: ['fields.order'],
+    })
+
+    return response.items
+  } catch (error) {
+    console.error('Error fetching feature sections:', error)
+    return []
+  }
+}
