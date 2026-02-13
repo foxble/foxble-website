@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export const metadata: Metadata = {
-  title: 'Tracking Features',
+  title: 'Tracking Solution',
   description: 'Professional GPS tracking solutions with real-time monitoring, daily reports, and comprehensive device management.',
 }
 
@@ -23,7 +23,7 @@ export default async function Tracking() {
       <div className="min-h-screen bg-white">
         {/* Header */}
         <div className="max-w-7xl mx-auto px-4 py-16 mt-16">
-          <h1 className="text-4xl font-bold text-center mb-16">Tracking Features</h1>
+          <h1 className="text-4xl font-bold text-center mb-16">Tracking Solution</h1>
 
           {/* Feature Sections */}
           <div className="space-y-24">
@@ -83,7 +83,7 @@ export default async function Tracking() {
     return (
       <div className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-4 py-16 mt-16">
-          <h1 className="text-4xl font-bold text-center mb-8">Tracking Features</h1>
+          <h1 className="text-4xl font-bold text-center mb-8">Tracking Solution</h1>
           <p className="text-center text-gray-600">
             Content managed through Contentful. Create "Feature Section" entries to display here.
           </p>
