@@ -43,6 +43,16 @@ const renderOptions = {
     [BLOCKS.OL_LIST]: (node: any, children: any) => (
       <ol className="list-decimal ml-6 mb-4 [&_li_p]:mb-0 [&_li_p]:inline">{children}</ol>
     ),
+    [INLINES.HYPERLINK]: (node: any, children: any) => (
+      <a
+        href={node.data.uri}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 hover:text-blue-800 underline"
+      >
+        {children}
+      </a>
+    ),
   },
 }
 
