@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { getPage } from '@/lib/contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import type { Block, Inline } from '@contentful/rich-text-types'
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic'
@@ -34,10 +35,13 @@ const renderOptions = {
       <h4 className="text-xl font-semibold mt-6 mb-3">{children}</h4>
     ),
     [BLOCKS.UL_LIST]: (node: any, children: any) => (
-      <ul className="list-disc list-inside mb-4 space-y-2">{children}</ul>
+      <ul className="list-disc ml-6 mb-4 [&_li_p]:mb-0 [&_li_p]:inline">{children}</ul>
+    ),
+    [BLOCKS.LIST_ITEM]: (node: any, children: any) => (
+      <li className="text-lg leading-relaxed">{children}</li>
     ),
     [BLOCKS.OL_LIST]: (node: any, children: any) => (
-      <ol className="list-decimal list-inside mb-4 space-y-2">{children}</ol>
+      <ol className="list-decimal ml-6 mb-4 [&_li_p]:mb-0 [&_li_p]:inline">{children}</ol>
     ),
   },
 }
