@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   // Fallback values if Contentful is unavailable
   let metaTitle = 'Foxble | Global Wireless IoT Solutions'
   let metaDescription = 'Foxble provides global wireless IoT solutions for tracking and monitoring devices worldwide. Connect, monitor, and manage your IoT devices with our cutting-edge technology.'
-  let metaKeywords = ['IoT', 'wireless', 'tracking', 'monitoring', 'global', 'devices', 'sensors', 'connectivity']
+  let metaKeywords = ['contractor tracking', 'location tracking', 'GPS tracking', 'automatic time tracking', 'workforce monitoring', 'time log reports', 'track contractors', 'track employees', 'asset tracking', 'no clock-in tracking', 'worker location tracking', 'time per location']
 
   try {
     const settings = await getSiteSettings()
