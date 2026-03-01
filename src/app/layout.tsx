@@ -25,7 +25,7 @@ const michroma = Michroma({
 export async function generateMetadata(): Promise<Metadata> {
   // Fallback values if Contentful is unavailable
   let metaTitle = 'Foxble | Global Wireless IoT Solutions'
-  let metaDescription = 'Foxble provides global wireless IoT solutions for tracking and monitoring devices worldwide. Connect, monitor, and manage your IoT devices with our cutting-edge technology.'
+  let metaDescription = 'Foxble is a professional fleet and workforce management platform. Track GPS location and job site hours for your contractors and employees in real time. Generate automatic time reports per location — simple setup, no manual time entry needed.'
   let metaKeywords = ['contractor tracking', 'location tracking', 'GPS tracking', 'automatic time tracking', 'workforce monitoring', 'time log reports', 'track contractors', 'track employees', 'asset tracking', 'no clock-in tracking', 'worker location tracking', 'time per location']
 
   try {
