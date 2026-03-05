@@ -13,6 +13,8 @@ export default function Navigation() {
     { href: '/tracking', label: 'Tracking' },
     { href: '/faq', label: 'FAQ' },
     { href: '/policies', label: 'Policies' },
+    { href: '/terms', label: 'Terms' },
+    { href: '/privacy', label: 'Privacy' },
   ]
 
   return (
