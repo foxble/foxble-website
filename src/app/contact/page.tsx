@@ -20,8 +20,8 @@ export default function Contact() {
 
       <div className="mt-12 text-center text-gray-600">
         <p className="mb-2">Or email us directly at:</p>
-        <a href="mailto:support@foxble.com" className="text-blue-600 hover:underline font-medium">
-          support@foxble.com
+        <a href="mailto:info@foxble.com" className="text-blue-600 hover:underline font-medium">
+          info@foxble.com
         </a>
       </div>
     </section>
