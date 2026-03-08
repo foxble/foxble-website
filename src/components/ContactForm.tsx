@@ -38,6 +38,11 @@ export default function ContactForm() {
           category: 'Contact',
           label: 'Contact Form',
         })
+
+        // Track Lead event in Meta Pixel
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          ;(window as any).fbq('track', 'Lead')
+        }
       } else {
         setStatus('error')
         setErrorMessage(data.error || 'Failed to send message')
