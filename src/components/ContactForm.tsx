@@ -31,7 +31,7 @@ export default function ContactForm() {
 
       if (response.ok) {
         setStatus('success')
-        setFormData({ name: '', email: '', message: '' })
+        setFormData({ name: '', email: '', message: '', website: '' })
 
         // Track successful form submission in Google Analytics
         event({
