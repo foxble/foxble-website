@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Michroma } from "next/font/google";
 import "./globals.css";
 import Analytics from "@/components/Analytics";
+import MetaPixel from "@/components/MetaPixel";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getSiteSettings } from "@/lib/contentful";
@@ -120,6 +121,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${michroma.variable} antialiased bg-[#37387a]`}
       >
         <Analytics />
+        <MetaPixel />
         <Navigation />
         <main>
           {children}
