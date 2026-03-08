@@ -8,6 +8,7 @@ export default function ContactForm() {
     name: '',
     email: '',
     message: '',
+    website: '', // honeypot - must stay empty
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -55,6 +56,17 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
+      {/* Honeypot field - hidden from real users, bots will fill it */}
+      <div style={{ display: 'none' }} aria-hidden="true">
+        <input
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
       {status === 'success' && (
         <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
           <p className="font-medium">Message sent successfully!</p>

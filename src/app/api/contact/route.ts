@@ -17,7 +17,12 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { name, email, message } = body
+    const { name, email, message, website } = body
+
+    // Honeypot check - bots fill hidden fields, humans don't
+    if (website) {
+      return NextResponse.json({ success: true }, { status: 200 })
+    }
 
     // Validate inputs
     if (!name || name.length < 2) {
