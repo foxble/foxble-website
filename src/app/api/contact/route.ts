@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { sendMetaEvent } from '@/lib/meta-capi'
 
 // Initialize Resend only if API key is available
 const resend = process.env.RESEND_API_KEY
@@ -64,6 +65,14 @@ export async function POST(request: NextRequest) {
         <p><strong>Message:</strong></p>
         <p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>
       `,
+    })
+
+    // Send Lead event via Meta Conversions API (server-side)
+    await sendMetaEvent({
+      eventName: 'Lead',
+      eventSourceUrl: 'https://foxble.com/contact',
+      clientIpAddress: request.headers.get('x-forwarded-for') || undefined,
+      clientUserAgent: request.headers.get('user-agent') || undefined,
     })
 
     return NextResponse.json(
