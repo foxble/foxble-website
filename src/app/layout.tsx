@@ -110,7 +110,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="en" className="bg-[#37387a]">
       <head>
         <script
           type="application/ld+json"
