@@ -150,7 +150,7 @@ export default function ContactForm() {
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             required
             minLength={10}
-            rows={4}
+            rows={2}
             className={`${fieldClass} resize-none`}
             disabled={status === 'loading'}
           />
