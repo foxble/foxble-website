@@ -78,6 +78,9 @@ export default function ContactForm() {
     }
   }
 
+  const fieldClass = 'w-full bg-transparent border-0 border-b border-gray-400 focus:outline-none focus:border-slate-600 px-0 py-2 text-gray-700 placeholder-gray-400'
+  const labelClass = 'block text-sm text-gray-500 mb-1'
+
   return (
     <>
       <Script
@@ -85,7 +88,7 @@ export default function ContactForm() {
         strategy="lazyOnload"
         onLoad={renderTurnstile}
       />
-      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Honeypot field - hidden from real users, bots will fill it */}
         <div style={{ display: 'none' }} aria-hidden="true">
           <input
@@ -99,23 +102,21 @@ export default function ContactForm() {
         </div>
 
         {status === 'success' && (
-          <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
+          <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded">
             <p className="font-medium">Message sent successfully!</p>
             <p className="text-sm">We&apos;ll get back to you as soon as possible.</p>
           </div>
         )}
 
         {status === 'error' && (
-          <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+          <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded">
             <p className="font-medium">Error sending message</p>
             <p className="text-sm">{errorMessage}</p>
           </div>
         )}
 
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            Name
-          </label>
+          <label htmlFor="name" className={labelClass}>Name</label>
           <input
             type="text"
             id="name"
@@ -123,41 +124,34 @@ export default function ContactForm() {
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
             minLength={2}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-            placeholder="Your name"
+            className={fieldClass}
             disabled={status === 'loading'}
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            Email
-          </label>
+          <label htmlFor="email" className={labelClass}>Email</label>
           <input
             type="email"
             id="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-            placeholder="your.email@example.com"
+            className={fieldClass}
             disabled={status === 'loading'}
           />
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-            Message
-          </label>
+          <label htmlFor="message" className={labelClass}>Message</label>
           <textarea
             id="message"
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             required
             minLength={10}
-            rows={3}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-y"
-            placeholder="Your message..."
+            rows={4}
+            className={`${fieldClass} resize-none`}
             disabled={status === 'loading'}
           />
         </div>
@@ -167,9 +161,9 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'loading' || !turnstileToken}
-          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200"
+          className="bg-slate-500 hover:bg-slate-600 disabled:bg-gray-400 text-white font-medium py-3 px-8 uppercase tracking-widest text-sm transition-colors duration-200"
         >
-          {status === 'loading' ? 'Sending...' : 'Submit'}
+          {status === 'loading' ? 'Sending...' : 'Send Message'}
         </button>
       </form>
     </>
