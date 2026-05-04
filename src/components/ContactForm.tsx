@@ -85,7 +85,7 @@ export default function ContactForm() {
         strategy="lazyOnload"
         onLoad={renderTurnstile}
       />
-      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
+      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4">
         {/* Honeypot field - hidden from real users, bots will fill it */}
         <div style={{ display: 'none' }} aria-hidden="true">
           <input
@@ -155,7 +155,7 @@ export default function ContactForm() {
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             required
             minLength={10}
-            rows={6}
+            rows={3}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-y"
             placeholder="Your message..."
             disabled={status === 'loading'}
