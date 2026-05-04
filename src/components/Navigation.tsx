@@ -12,8 +12,6 @@ export default function Navigation() {
     { href: '/contact', label: 'Contact' },
     { href: '/tracking', label: 'Tracking' },
     { href: '/faq', label: 'FAQ' },
-    { href: '/terms', label: 'Terms' },
-    { href: '/privacy', label: 'Privacy' },
   ]
 
   return (
