@@ -18,11 +18,39 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { name, email, message, website } = body
+    const { name, email, message, website, turnstileToken } = body
 
     // Honeypot check - bots fill hidden fields, humans don't
     if (website) {
       return NextResponse.json({ success: true }, { status: 200 })
+    }
+
+    // Cloudflare Turnstile verification
+    if (!turnstileToken) {
+      return NextResponse.json(
+        { error: 'Please complete the CAPTCHA verification' },
+        { status: 400 }
+      )
+    }
+
+    const turnstileRes = await fetch(
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          secret: process.env.TURNSTILE_SECRET_KEY || '',
+          response: turnstileToken,
+          remoteip: request.headers.get('x-forwarded-for') || '',
+        }),
+      }
+    )
+    const turnstileData = await turnstileRes.json()
+    if (!turnstileData.success) {
+      return NextResponse.json(
+        { error: 'CAPTCHA verification failed. Please try again.' },
+        { status: 400 }
+      )
     }
 
     // Validate inputs
