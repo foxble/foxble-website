@@ -26,14 +26,17 @@ export default async function Home() {
         : undefined
 
       return (
-        <Hero
-          title={title}
-          subtitle1={subtitle1}
-          subtitle2={subtitle2}
-          backgroundImage={backgroundImageUrl}
-          bannerImage={bannerImageUrl}
-          showBanner={showBanner !== false} // Default to true if not specified
-        />
+        <>
+          <Hero
+            title={title}
+            subtitle1={subtitle1}
+            subtitle2={subtitle2}
+            backgroundImage={backgroundImageUrl}
+            bannerImage={bannerImageUrl}
+            showBanner={showBanner !== false}
+          />
+          <div className="py-4 bg-[#37387a]" />
+        </>
       )
     }
   } catch (error) {
@@ -41,5 +44,10 @@ export default async function Home() {
   }
 
   // Fallback to default hero
-  return <Hero />
+  return (
+    <>
+      <Hero />
+      <div className="py-4 bg-[#37387a]" />
+    </>
+  )
 }
