@@ -110,7 +110,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" className="bg-[#37387a]">
+    <html lang="en">
       <head>
         <script
           type="application/ld+json"
@@ -118,12 +118,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${michroma.variable} antialiased bg-[#37387a]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${michroma.variable} antialiased bg-[#37387a] flex flex-col min-h-screen`}
       >
         <Analytics />
         <MetaPixel />
         <Navigation />
-        <main>
+        <main className="flex-1">
           {children}
         </main>
         <Footer />
