@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="bg-gray-100">
       <section className="max-w-2xl mx-auto px-8 pt-24 pb-12">
         <h2 className="text-4xl font-light tracking-[0.3em] text-center text-slate-400 uppercase mb-6">
           Get in Touch
