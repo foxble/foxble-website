@@ -247,7 +247,27 @@ The updated Policy will indicate the revised effective date. Your continued use 
 
 ---
 
-## 14. Contact Us
+## 14. SMS Messaging and Opt-In Consent
+
+Foxble may send SMS (text message) notifications to users who provide a mobile phone number in connection with the Service. These messages may include account alerts, device status notifications, tracking updates, and service-related communications.
+
+**Opt-In:** By providing your mobile phone number and agreeing to receive SMS messages from Foxble, you expressly consent to receive text messages from us. Consent is not a condition of purchasing any goods or services.
+
+**Message Frequency:** Message frequency varies based on your account activity and notification settings. You may receive up to several messages per day depending on your configured alerts.
+
+**Message and Data Rates:** Standard message and data rates may apply depending on your mobile carrier and plan.
+
+**Opt-Out:** You may opt out of SMS messages at any time by replying **STOP** to any message you receive from us. After opting out, you will receive a single confirmation message and no further SMS messages will be sent unless you opt in again.
+
+**Help:** Reply **HELP** to any SMS message for assistance, or contact us at info@foxble.com.
+
+**Supported Carriers:** Major US carriers are supported. Carrier availability may vary.
+
+**Privacy:** Your mobile number will not be shared with third parties for their own marketing purposes.
+
+---
+
+## 15. Contact Us
 
 If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact:
 
@@ -260,4 +280,4 @@ We aim to respond to all inquiries within 30 days or within the timeframe requir
 
 ---
 
-*This Privacy Policy was last updated on March 5, 2026.*
+*This Privacy Policy was last updated on May 26, 2026.*
