@@ -2,7 +2,7 @@
 
 **Foxble LLC**
 **Effective Date:** March 5, 2026
-**Last Updated:** March 5, 2026
+**Last Updated:** May 26, 2026
 
 ---
 
